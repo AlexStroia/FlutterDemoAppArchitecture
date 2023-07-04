@@ -1,0 +1,32 @@
+name: page
+description: Creates Page, Presenter, PresentationModel and relevant tests. Registers the whole structure in getIt dependency graph.
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.26 <0.1.0"
+
+vars:
+  root_folder_path:
+    type: string
+    description: root folder path to project where main pubspec.yaml is located
+    default: /Users/alexandrustroia/Desktop/projects/demo_app_architecture
+    prompt: "ABSOLUTE path to project's root directory: "
+
+  name:
+    type: string
+    description: "Name"
+    default: "Default"
+    prompt: "What is the name?"
+
+  feature_name:
+    type: string
+    description: "What is the name of the feature?"
+    default: "default"
+    prompt: "Feature name (in snake_case): "
+
+  subdirectory:
+    type: string
+    description: "subdirectory name inside the feature (OPTIONAL)"
+    prompt: "subdirectory name inside the feature (OPTIONAL): "
+

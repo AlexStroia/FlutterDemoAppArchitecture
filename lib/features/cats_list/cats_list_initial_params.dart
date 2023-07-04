@@ -1,0 +1,3 @@
+class CatsListInitialParams {
+  const CatsListInitialParams();
+}
