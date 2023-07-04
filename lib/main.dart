@@ -1,5 +1,4 @@
 import 'package:demo_app_architecture/dependency_injection/app_component.dart';
-import 'package:demo_app_architecture/features/cats_list/dependency_injection/feature_component.dart';
 import 'package:demo_app_architecture/router/app_router.dart';
 import 'package:demo_app_architecture/theme/app_theme.dart';
 import 'package:flutter/material.dart';

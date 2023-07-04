@@ -12,6 +12,12 @@
       <excludeFolder url="file://$MODULE_DIR$/mason/page/hooks/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/mason/page/hooks/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/mason/page/hooks/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mason/repository/hooks/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/mason/repository/hooks/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mason/repository/hooks/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/mason/use_case/hooks/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/mason/use_case/hooks/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mason/use_case/hooks/.dart_tool" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />
