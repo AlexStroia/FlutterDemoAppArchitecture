@@ -1,3 +1,4 @@
+import 'package:demo_app_architecture/utils/extensions/string_extensions.dart';
 import 'package:equatable/equatable.dart';
 
 class Cat extends Equatable {
@@ -49,12 +50,19 @@ class Cat extends Equatable {
   }
 
   factory Cat.fromJson(Map<String, dynamic> json) {
+    final createdAt = json['createdAt'] == 'null'
+        ? ' '
+        : json['createdAt'].toString().toDate();
+
+    final updatedAt = json['updatedAt'] == 'null'
+        ? ' '
+        : json['updatedAt'].toString().toDate();
     return Cat(
       tags: List<String>.from(json['tags'] ?? []),
       id: json['_id'] == 'null' ? ' ' : json['_id'],
       owner: json['owner'] == 'null' ? ' ' : json['owner'],
-      createdAt: json['createdAt'] == 'null' ? ' ' : json['createdAt'],
-      updatedAt: json['updatedAt'] == 'null' ? ' ' : json['updatedAt'],
+      createdAt: json['createdAt'] == 'null' ? ' ' : createdAt,
+      updatedAt: json['updatedAt'] == 'null' ? ' ' : updatedAt,
     );
   }
 }

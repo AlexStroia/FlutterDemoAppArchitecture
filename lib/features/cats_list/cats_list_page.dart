@@ -1,3 +1,4 @@
+import 'package:demo_app_architecture/features/cats_list/widgets/cats_list.dart';
 import 'package:flutter/material.dart';
 import 'package:demo_app_architecture/core/utils/mvp_extensions.dart';
 import 'package:demo_app_architecture/features/cats_list/cats_list_presentation_model.dart';
@@ -31,12 +32,5 @@ class _CatsListPageState extends State<CatsListPage>
       builder: (context, state) => Scaffold(
           body: state.isLoading
               ? const Center(child: CircularProgressIndicator())
-              : ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: state.catsList.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [Text(state.catsList[index].createdAt)],
-                    );
-                  })));
+              : CatsList(cats: state.catsList)));
 }
