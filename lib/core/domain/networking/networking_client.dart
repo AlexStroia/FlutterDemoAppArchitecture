@@ -13,17 +13,11 @@ class NetworkClient {
     required String path,
     String? params,
   }) async {
-    final url = Uri.https(baseUrl, params != null ? "$path/$params" : path);
+    final url = Uri.parse(baseUrl + path);
+
     try {
-      final response = await http.get(
-        url,
-        headers: _getHeaders(),
-      );
-      if (response.statusCode == 200) {
-        return Right(response);
-      } else {
-        return Left(NetworkFailure());
-      }
+      final response = await http.get(url, headers: _getHeaders());
+      return Right(response);
     } catch (e) {
       return Left(NetworkFailure());
     }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:demo_app_architecture/core/api_constants.dart';
 import 'package:demo_app_architecture/core/domain/model/cat.dart';
 import 'package:demo_app_architecture/core/domain/model/get_cats_list_failure.dart';
 import 'package:demo_app_architecture/core/domain/networking/networking_client.dart';
@@ -14,7 +15,7 @@ class RestApiCatsRepository implements CatsRepository {
 
   @override
   Future<Either<GetCatsListFailure, List<Cat>>> getCatsList() {
-    return networkClient.get(path: '').mapSuccess((response) {
+    return networkClient.get(path: ApiConstants.cats).mapSuccess((response) {
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
         final catsData = body as List<dynamic>;

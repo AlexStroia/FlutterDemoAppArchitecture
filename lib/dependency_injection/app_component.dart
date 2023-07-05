@@ -1,3 +1,4 @@
+import 'package:demo_app_architecture/core/api_constants.dart';
 import 'package:demo_app_architecture/core/domain/networking/networking_client.dart';
 import 'package:demo_app_architecture/router/app_navigator.dart';
 import 'package:demo_app_architecture/router/app_router.dart';
@@ -29,5 +30,5 @@ _configureNavigator() {
 }
 
 void _configureNetworkClient() =>
-    getIt.registerFactory(() => NetworkClient(baseUrl: 'https://cataas.com/api/'));
+    getIt.registerFactory(() => NetworkClient(baseUrl: ApiConstants.baseUrl));
 

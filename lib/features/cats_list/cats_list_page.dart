@@ -1,11 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:demo_app_architecture/core/utils/mvp_extensions.dart';
 import 'package:demo_app_architecture/features/cats_list/cats_list_presentation_model.dart';
 import 'package:demo_app_architecture/features/cats_list/cats_list_presenter.dart';
 
 class CatsListPage extends StatefulWidget with HasPresenter<CatsListPresenter> {
-
   const CatsListPage({
     super.key,
     required this.presenter,
@@ -18,13 +16,27 @@ class CatsListPage extends StatefulWidget with HasPresenter<CatsListPresenter> {
   State<CatsListPage> createState() => _CatsListPageState();
 }
 
-class _CatsListPageState extends State<CatsListPage> with PresenterStateMixin<CatsListViewModel, CatsListPresenter, CatsListPage> {
+class _CatsListPageState extends State<CatsListPage>
+    with
+        PresenterStateMixin<CatsListViewModel, CatsListPresenter,
+            CatsListPage> {
+  @override
+  void initState() {
+    super.initState();
+    presenter.getCatsList();
+  }
 
   @override
-  Widget build(BuildContext context) => const Scaffold(
-      body: Center(
-        child: Text("CatsListPage\n(NOT IMPLEMENTED YET)"),
-      ),
-    );
-
+  Widget build(BuildContext context) => stateObserver(
+      builder: (context, state) => Scaffold(
+          body: state.isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.catsList.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [Text(state.catsList[index].createdAt)],
+                    );
+                  })));
 }

@@ -50,12 +50,11 @@ class Cat extends Equatable {
 
   factory Cat.fromJson(Map<String, dynamic> json) {
     return Cat(
-      tags: List<String>.from(json['tags']),
-      id: json['id'] as String,
-      owner: json['owner'] as String,
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
+      tags: List<String>.from(json['tags'] ?? []),
+      id: json['_id'] == 'null' ? ' ' : json['_id'],
+      owner: json['owner'] == 'null' ? ' ' : json['owner'],
+      createdAt: json['createdAt'] == 'null' ? ' ' : json['createdAt'],
+      updatedAt: json['updatedAt'] == 'null' ? ' ' : json['updatedAt'],
     );
   }
-
 }
