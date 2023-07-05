@@ -81,7 +81,7 @@ class _ErrorWidgetState extends State<ErrorWidget> {
                   onTap: widget.onTapAction,
                 ),
               ),
-              const SizedBox(height: 40),
+              const Spacer(),
             ],
           );
         },

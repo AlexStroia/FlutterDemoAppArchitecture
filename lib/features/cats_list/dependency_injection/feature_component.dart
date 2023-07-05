@@ -1,6 +1,13 @@
+import 'package:demo_app_architecture/core/data/database_cats_repository.dart';
+import 'package:demo_app_architecture/core/data/network_connection_repository.dart';
 import 'package:demo_app_architecture/core/data/rest_api_cats_repository.dart';
 import 'package:demo_app_architecture/core/domain/repositories/cats_repository.dart';
+import 'package:demo_app_architecture/core/domain/repositories/connection_repository.dart';
+import 'package:demo_app_architecture/core/domain/repositories/offline_cats_repository.dart';
+import 'package:demo_app_architecture/core/domain/use_cases/connection_use_case.dart';
+import 'package:demo_app_architecture/core/domain/use_cases/get_cats_from_database_use_case.dart';
 import 'package:demo_app_architecture/core/domain/use_cases/get_cats_list_use_case.dart';
+import 'package:demo_app_architecture/core/domain/use_cases/save_cats_to_database_use_case.dart';
 import 'package:demo_app_architecture/dependency_injection/app_component.dart';
 import 'package:demo_app_architecture/features/cats_list/cats_list_initial_params.dart';
 import 'package:demo_app_architecture/features/cats_list/cats_list_page.dart';
@@ -28,11 +35,16 @@ void _configureGeneralDependencies() {
 //ignore: long-method
 void _configureRepositories() {
   // ignore: unnecessary_statements
-  getIt.registerFactory<CatsRepository>(
-    () => RestApiCatsRepository(
-      getIt(),
-    ),
-  )
+  getIt
+        ..registerFactory<CatsRepository>(
+          () => RestApiCatsRepository(
+            getIt(),
+          ),
+        )
+        ..registerFactory<OfflineCatsRepository>(
+            () => DatabaseCatsRepository(getIt()))
+        ..registerFactory<ConnectionRepository>(
+            () => const NetworkConnectionRepository())
       //DO-NOT-REMOVE REPOSITORIES_GET_IT_CONFIG
       ;
 }
@@ -48,7 +60,12 @@ void _configureStores() {
 //ignore: long-method
 void _configureUseCases() {
   // ignore: unnecessary_statements
-  getIt.registerFactory<GetCatsListUseCase>(() => GetCatsListUseCase(getIt()));
+  getIt
+    ..registerFactory<GetCatsFromDatabaseUseCase>(
+        () => GetCatsFromDatabaseUseCase(getIt()))
+    ..registerFactory<ConnectionUseCase>(() => ConnectionUseCase(getIt()))
+    ..registerFactory<SaveCatsToDatabaseUseCase>(() => SaveCatsToDatabaseUseCase(getIt()))
+    ..registerFactory<GetCatsListUseCase>(() => GetCatsListUseCase(getIt()));
 }
 
 //ignore: long-method
@@ -61,6 +78,9 @@ void _configureMvp() {
     ..registerFactoryParam<CatsListPresenter, CatsListInitialParams, dynamic>(
       (initialParams, _) => CatsListPresenter(
         getIt<CatsListPresentationModel>(param1: initialParams),
+        getIt(),
+        getIt(),
+        getIt(),
         getIt(),
         getIt(),
       ),

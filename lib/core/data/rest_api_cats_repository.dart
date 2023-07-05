@@ -20,7 +20,6 @@ class RestApiCatsRepository implements CatsRepository {
         final body = jsonDecode(response.body);
         final catsData = body as List<dynamic>;
         final cats = catsData.map((catData) => Cat.fromJson(catData)).toList();
-        print(cats);
         return cats;
       } else {
         throw const GetCatsListFailure.unknown();

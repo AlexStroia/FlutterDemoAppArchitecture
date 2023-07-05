@@ -58,6 +58,18 @@ class AppNavigator {
     }
   }
 
+  Future<void> showSnackbar({required String message, BuildContext? context}) async {
+    final snackbar = SnackBar(
+      content: Text(message),
+      duration: const Duration(seconds: 3),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+    );
+
+    ScaffoldMessenger.of(context ?? this.context!).showSnackBar(snackbar);
+  }
+
   Future<void> showError(
     DisplayableFailure failure, {
     BuildContext? context,

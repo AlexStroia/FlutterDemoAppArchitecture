@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:demo_app_architecture/utils/extensions/string_extensions.dart';
 import 'package:equatable/equatable.dart';
 
@@ -49,6 +51,16 @@ class Cat extends Equatable {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      "tags": jsonEncode(tags),
+      "id": id,
+      "owner": owner,
+      "createdAt": createdAt,
+      "updatedAt": updatedAt,
+    };
+  }
+
   factory Cat.fromJson(Map<String, dynamic> json) {
     final createdAt = json['createdAt'] == 'null'
         ? ' '
@@ -60,6 +72,25 @@ class Cat extends Equatable {
     return Cat(
       tags: List<String>.from(json['tags'] ?? []),
       id: json['_id'] == 'null' ? ' ' : json['_id'],
+      owner: json['owner'] == 'null' ? ' ' : json['owner'],
+      createdAt: json['createdAt'] == 'null' ? ' ' : createdAt,
+      updatedAt: json['updatedAt'] == 'null' ? ' ' : updatedAt,
+    );
+  }
+
+  factory Cat.fromDatabase(Map<String, dynamic> json) {
+    final createdAt =
+        json['createdAt'] == 'null' ? ' ' : json['createdAt'].toString();
+
+    final updatedAt =
+        json['updatedAt'] == 'null' ? ' ' : json['updatedAt'].toString();
+    final List<String> tags = (json['tags'] as String)
+        .split(',')
+        .map((e) => e.replaceAll('\"', '').trim())
+        .toList();
+    return Cat(
+      tags: json['tags'] == null ? [] : tags.toList() as List<String>,
+      id: json['id'] == 'null' ? ' ' : json['id'],
       owner: json['owner'] == 'null' ? ' ' : json['owner'],
       createdAt: json['createdAt'] == 'null' ? ' ' : createdAt,
       updatedAt: json['updatedAt'] == 'null' ? ' ' : updatedAt,
