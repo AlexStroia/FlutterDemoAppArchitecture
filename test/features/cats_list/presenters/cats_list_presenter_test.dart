@@ -3,7 +3,8 @@ import 'package:demo_app_architecture/features/cats_list/cats_list_initial_param
 import 'package:demo_app_architecture/features/cats_list/cats_list_presentation_model.dart';
 import 'package:demo_app_architecture/features/cats_list/cats_list_presenter.dart';
 
-import '../../../test/mocks/mock_definitions.dart';
+import '../../../mocks/mock_definitions.dart';
+import '../../../mocks/mocks.dart';
 
 void main() {
   late CatsListPresentationModel model;
@@ -12,7 +13,7 @@ void main() {
 
   test(
     'sample test',
-        () {
+    () {
       expect(presenter, isNotNull); // TODO implement this
     },
   );
@@ -23,6 +24,10 @@ void main() {
     presenter = CatsListPresenter(
       model,
       navigator,
+      Mocks.getCatsListUseCase,
+      Mocks.getCatsFromDatabaseUseCase,
+      Mocks.saveCatsToDatabaseUseCase,
+      Mocks.connectionUseCase,
     );
   });
 }

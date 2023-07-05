@@ -3,11 +3,13 @@ import 'package:demo_app_architecture/core/utils/either_extensions.dart';
 import 'package:demo_app_architecture/dependency_injection/app_component.dart';
 import 'package:demo_app_architecture/core/domain/use_cases/get_cats_list_use_case.dart';
 
+import '../../mocks/mocks.dart';
+
 void main() {
   late GetCatsListUseCase useCase;
 
   setUp(() {
-    useCase = const GetCatsListUseCase();
+    useCase = GetCatsListUseCase(Mocks.restApiCatsRepository);
   });
 
   test(

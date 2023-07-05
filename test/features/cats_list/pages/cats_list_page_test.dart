@@ -6,8 +6,9 @@ import 'package:demo_app_architecture/features/cats_list/cats_list_presentation_
 import 'package:demo_app_architecture/features/cats_list/cats_list_presenter.dart';
 import 'package:demo_app_architecture/router/app_navigator.dart';
 
-import '../../../test/mocks/mocks.dart';
-import '../../../test/test_utils/golden_tests_utils.dart';
+import '../../../mocks/mocks.dart';
+import '../../../test_utils/golden_tests_utils.dart';
+
 
 Future<void> main() async {
   late CatsListPage page;
@@ -21,10 +22,14 @@ Future<void> main() async {
     model = CatsListPresentationModel.initial(
       initParams,
     );
-    navigator = AppNavigator(Mocks.mockAppRouter);
+    navigator = AppNavigator(Mocks.appRouter);
     presenter = CatsListPresenter(
       model,
       navigator,
+      Mocks.getCatsListUseCase,
+      Mocks.getCatsFromDatabaseUseCase,
+      Mocks.saveCatsToDatabaseUseCase,
+      Mocks.connectionUseCase,
     );
     page = CatsListPage(presenter: presenter);
   }
