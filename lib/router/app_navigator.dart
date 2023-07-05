@@ -1,4 +1,4 @@
-import 'package:demo_app_architecture/core/model/displayable_failure.dart';
+import 'package:demo_app_architecture/core/domain/model/displayable_failure.dart';
 import 'package:demo_app_architecture/features/widgets/error_widget.dart';
 import 'package:demo_app_architecture/router/app_router.dart';
 import 'package:flutter/material.dart';

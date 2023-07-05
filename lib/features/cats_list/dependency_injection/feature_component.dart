@@ -1,3 +1,6 @@
+import 'package:demo_app_architecture/core/data/rest_api_cats_repository.dart';
+import 'package:demo_app_architecture/core/domain/repositories/cats_repository.dart';
+import 'package:demo_app_architecture/core/domain/use_cases/get_cats_list_use_case.dart';
 import 'package:demo_app_architecture/dependency_injection/app_component.dart';
 import 'package:demo_app_architecture/features/cats_list/cats_list_initial_params.dart';
 import 'package:demo_app_architecture/features/cats_list/cats_list_page.dart';
@@ -18,15 +21,19 @@ void configureDependencies() {
 void _configureGeneralDependencies() {
   // ignore: unnecessary_statements
   getIt
-  //DO-NOT-REMOVE GENERAL_DEPS_GET_IT_CONFIG
+      //DO-NOT-REMOVE GENERAL_DEPS_GET_IT_CONFIG
       ;
 }
 
 //ignore: long-method
 void _configureRepositories() {
   // ignore: unnecessary_statements
-  getIt
-  //DO-NOT-REMOVE REPOSITORIES_GET_IT_CONFIG
+  getIt.registerFactory<CatsRepository>(
+    () => RestApiCatsRepository(
+      getIt(),
+    ),
+  )
+      //DO-NOT-REMOVE REPOSITORIES_GET_IT_CONFIG
       ;
 }
 
@@ -34,35 +41,32 @@ void _configureRepositories() {
 void _configureStores() {
   // ignore: unnecessary_statements
   getIt
-  //DO-NOT-REMOVE STORES_GET_IT_CONFIG
+      //DO-NOT-REMOVE STORES_GET_IT_CONFIG
       ;
 }
 
 //ignore: long-method
 void _configureUseCases() {
   // ignore: unnecessary_statements
-  getIt
-  //DO-NOT-REMOVE USE_CASES_GET_IT_CONFIG
-      ;
+  getIt.registerFactory<GetCatsListUseCase>(() => GetCatsListUseCase(getIt()));
 }
 
 //ignore: long-method
 void _configureMvp() {
   getIt
-    ..registerFactoryParam<CatsListPresentationModel,
-        CatsListInitialParams, dynamic>(
-          (params, _) => CatsListPresentationModel.initial(params),
+    ..registerFactoryParam<CatsListPresentationModel, CatsListInitialParams,
+        dynamic>(
+      (params, _) => CatsListPresentationModel.initial(params),
     )
-    ..registerFactoryParam<CatsListPresenter,
-        CatsListInitialParams, dynamic>(
-          (initialParams, _) => CatsListPresenter(
+    ..registerFactoryParam<CatsListPresenter, CatsListInitialParams, dynamic>(
+      (initialParams, _) => CatsListPresenter(
         getIt<CatsListPresentationModel>(param1: initialParams),
+        getIt(),
         getIt(),
       ),
     )
-    ..registerFactoryParam<CatsListPage, CatsListInitialParams,
-        dynamic>(
-          (initialParams, _) => CatsListPage(
+    ..registerFactoryParam<CatsListPage, CatsListInitialParams, dynamic>(
+      (initialParams, _) => CatsListPage(
         presenter: getIt(param1: initialParams),
       ),
     );

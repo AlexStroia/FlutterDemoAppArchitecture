@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:demo_app_architecture/core/model/network_failure.dart';
+import 'package:demo_app_architecture/core/domain/model/network_failure.dart';
 import 'package:http/http.dart' as http;
 
 class NetworkClient {

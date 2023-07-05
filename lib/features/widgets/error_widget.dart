@@ -1,4 +1,4 @@
-import 'package:demo_app_architecture/core/model/displayable_failure.dart';
+import 'package:demo_app_architecture/core/domain/model/displayable_failure.dart';
 import 'package:demo_app_architecture/features/widgets/rounded_button.dart';
 import 'package:demo_app_architecture/theme/app_theme.dart';
 import 'package:flutter/material.dart';
