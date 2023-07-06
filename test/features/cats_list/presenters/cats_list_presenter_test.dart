@@ -28,7 +28,8 @@ void main() {
         .thenAnswer((_) => successFuture(true));
     when(() => Mocks.getCatsListUseCase.execute())
         .thenAnswer((_) => successFuture(Stubs.cats));
-
+    when(() => Mocks.getCatsListUseCase.execute())
+        .thenAnswer((_) => successFuture(Stubs.cats));
     // WHEN
     await presenter.getCatsList();
 
@@ -36,20 +37,20 @@ void main() {
     verify(() => Mocks.getCatsListUseCase.execute());
   });
 
-  test('getCatsList should execute getCatsListFromDatabaseUseCase', () async {
-    // GIVEN
+  test('getCatsList should execute call saveDataToDatabaseUseCase', () async {
+    //GIVEN
     when(() => Mocks.connectionUseCase.execute())
-        .thenAnswer((_) => failFuture(Stubs.connFailure));
-    when(() => Mocks.getCatsFromDatabaseUseCase.execute())
-        .thenAnswer((_) => successFuture(Stubs.cats));
+        .thenAnswer((_) => successFuture(true));
     when(() => Mocks.getCatsListUseCase.execute())
-        .thenAnswer((_) => successFuture(Stubs.cats));
-
-    // WHEN
-    await presenter.getCatsList();
+        .thenAnswer((_) async => successFuture(Stubs.cats));
+    when(() => Mocks.saveCatsToDatabaseUseCase.execute(Stubs.cats))
+        .thenAnswer((_) async => successFuture(Stubs.cats.length));
 
     // THEN
-    verify(() => Mocks.getCatsFromDatabaseUseCase.execute());
+    await presenter.getCatsList();
+
+    // WHEN
+    verify(() => Mocks.saveCatsToDatabaseUseCase.execute(Stubs.cats));
   });
 
   setUp(() {

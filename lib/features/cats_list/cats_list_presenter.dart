@@ -29,36 +29,38 @@ class CatsListPresenter extends Cubit<CatsListViewModel> {
   CatsListPresentationModel get _model => state as CatsListPresentationModel;
 
   Future<void> getCatsList() =>
-      _getConnectionUseCase.execute().doOn(success: (isConnected) {
+      _getConnectionUseCase.execute().doOn(success: (isConnected) async {
         if (isConnected) {
-          _getCatsList();
+          await _getCatsList();
         } else {
           emit(_model.copyWith(isLoading: false));
         }
       }, fail: (failure) async {
+        navigator.showError(failure.displayableFailure());
         _getCatsFromDatabase();
       });
 
-  void _getCatsList() {
+  Future<void> _getCatsList() async {
     emit(_model.copyWith(isLoading: true));
-    _getCatsListUseCase.execute().doOn(success: (catsList) async {
-      _saveCatsToDatabase(catsList);
-    }, fail: (failure) {
-      emit(_model.copyWith(isLoading: false));
-      navigator.showError(failure.displayableFailure());
-    });
+    await _fetchCatsList();
   }
 
-  void _saveCatsToDatabase(List<Cat> catsList) {
-    _saveCatsToDatabaseUseCase.execute(catsList).doOn(success: (_) {
-      emit(_model.copyWith(isLoading: false, catsList: catsList));
-    }, fail: (failure) {
-      emit(_model.copyWith(isLoading: false));
-      navigator.showError(failure.displayableFailure());
-    });
-  }
+  Future<void> _fetchCatsList() async =>
+      _getCatsListUseCase.execute().doOn(success: (catsList) async {
+        await _saveCatsToDatabase(catsList);
+      }, fail: (failure) {
+        emit(_model.copyWith(isLoading: false));
+      });
 
-  void _getCatsFromDatabase() {
+  Future<void> _saveCatsToDatabase(List<Cat> catsList) async =>
+      _saveCatsToDatabaseUseCase.execute(catsList).doOn(success: (_) {
+        emit(_model.copyWith(isLoading: false, catsList: catsList));
+      }, fail: (failure) {
+        emit(_model.copyWith(isLoading: false));
+        navigator.showError(failure.displayableFailure());
+      });
+
+  Future<void> _getCatsFromDatabase() async {
     emit(_model.copyWith(isLoading: true));
     _getCatsFromDatabaseUseCase.execute().doOn(success: (catsList) {
       if (catsList.isEmpty) {
