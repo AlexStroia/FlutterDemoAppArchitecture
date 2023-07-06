@@ -1,4 +1,5 @@
 import 'package:demo_app_architecture/core/domain/model/cat.dart';
+import 'package:demo_app_architecture/core/domain/model/connection_failure.dart';
 
 class Stubs {
   static final cats = [
@@ -42,14 +43,14 @@ class Stubs {
 
   static final List<Map<String, dynamic>> catsDataDynamic = [
     {
-      'tags': ['Tag 1', 'Tag 2'],
+      'tags': 'tag',
       'id': '1',
       'owner': 'Owner 1',
       'createdAt': '2023-07-01',
       'updatedAt': '2023-07-02',
     },
     {
-      'tags': ['Tag 3', 'Tag 4'],
+      'tags': 'tag',
       'id': '2',
       'owner': 'Owner 2',
       'createdAt': '2023-07-03',
@@ -61,11 +62,13 @@ class Stubs {
         [
           {
             "tags": ["playful", "tabby", "striped"],
-            "id": "4",
+            "_id": "4",
             "owner": "Bob Thompson",
             "createdAt": "2022-01-07",
             "updatedAt": "2022-01-08"
           }
         ]
       ''';
+
+  static const connFailure = ConnectionFailure.unknown();
 }

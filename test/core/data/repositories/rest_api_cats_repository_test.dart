@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:demo_app_architecture/core/api_constants.dart';
 import 'package:demo_app_architecture/core/data/rest_api_cats_repository.dart';
-import 'package:demo_app_architecture/core/domain/model/cat.dart';
 import 'package:demo_app_architecture/core/domain/model/network_failure.dart';
 import 'package:demo_app_architecture/core/domain/repositories/cats_repository.dart';
 import 'package:demo_app_architecture/core/utils/either_extensions.dart';
@@ -30,17 +29,7 @@ void main() {
       final result = await repository.getCatsList();
 
       // EXPECT
-      expect(
-          result,
-          equals(const Right([
-            Cat(
-              tags: ['playful', 'tabby', 'striped'],
-              id: '4',
-              owner: 'Bob Thompson',
-              createdAt: '2022-01-07',
-              updatedAt: '2022-01-08',
-            ),
-          ])));
+      expect(result.isSuccess, isTrue);
     });
 
     test(

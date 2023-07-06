@@ -28,18 +28,16 @@ class CatsListPresenter extends Cubit<CatsListViewModel> {
   // ignore: unused_element
   CatsListPresentationModel get _model => state as CatsListPresentationModel;
 
-  void getCatsList() {
-    _getConnectionUseCase.execute().doOn(success: (isConnected) {
-      if (isConnected) {
-        _getCatsList();
-      } else {
-        emit(_model.copyWith(isLoading: false));
-      }
-    }, fail: (failure) {
-      navigator.showError(failure.displayableFailure());
-      _getCatsFromDatabase();
-    });
-  }
+  Future<void> getCatsList() =>
+      _getConnectionUseCase.execute().doOn(success: (isConnected) {
+        if (isConnected) {
+          _getCatsList();
+        } else {
+          emit(_model.copyWith(isLoading: false));
+        }
+      }, fail: (failure) async {
+        _getCatsFromDatabase();
+      });
 
   void _getCatsList() {
     emit(_model.copyWith(isLoading: true));
