@@ -31,9 +31,9 @@ Future<void> preparePageTests(FutureOr<void> Function() testMain) async {
   const isCi = bool.fromEnvironment('isCI');
   return AlchemistConfig.runWithConfig(
     config: const AlchemistConfig(
-      platformGoldensConfig:    PlatformGoldensConfig(
-      enabled: !isCi,
-    ),
+      platformGoldensConfig: PlatformGoldensConfig(
+        enabled: !isCi,
+      ),
     ),
     run: () async {
       return testMain();

@@ -2,7 +2,8 @@ import 'package:demo_app_architecture/core/domain/model/displayable_failure.dart
 
 class DatabaseFailure implements HasDisplayableFailure {
   // ignore: avoid_field_initializers_in_const_classes
-  const DatabaseFailure.unknown([this.cause]) : type = DatabaseFailureType.unknown;
+  const DatabaseFailure.unknown([this.cause])
+      : type = DatabaseFailureType.unknown;
   const DatabaseFailure.databaseNotInitialized([this.cause])
       : type = DatabaseFailureType.databaseNotInitialized;
 

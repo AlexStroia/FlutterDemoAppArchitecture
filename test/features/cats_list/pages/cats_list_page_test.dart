@@ -9,7 +9,6 @@ import 'package:demo_app_architecture/router/app_navigator.dart';
 import '../../../mocks/mocks.dart';
 import '../../../test_utils/golden_tests_utils.dart';
 
-
 Future<void> main() async {
   late CatsListPage page;
   late CatsListInitialParams initParams;

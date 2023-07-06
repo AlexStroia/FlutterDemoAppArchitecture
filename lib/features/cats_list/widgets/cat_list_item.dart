@@ -3,13 +3,13 @@ import 'package:demo_app_architecture/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CatListItem extends StatelessWidget {
-
   const CatListItem({
     Key? key,
     required this.cat,
   }) : super(key: key);
 
   final Cat cat;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).extension<AppTheme>()!;
@@ -41,10 +41,13 @@ class CatListItem extends StatelessWidget {
               cat.owner,
               style: fonts.p2,
             ),
+            Text(
+              cat.tags.toString(),
+              style: fonts.p2,
+            )
           ],
         ),
       ),
     );
   }
-
 }

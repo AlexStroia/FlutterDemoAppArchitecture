@@ -39,4 +39,33 @@ class Stubs {
       updatedAt: '2022-01-10',
     ),
   ];
+
+  static final List<Map<String, dynamic>> catsDataDynamic = [
+    {
+      'tags': ['Tag 1', 'Tag 2'],
+      'id': '1',
+      'owner': 'Owner 1',
+      'createdAt': '2023-07-01',
+      'updatedAt': '2023-07-02',
+    },
+    {
+      'tags': ['Tag 3', 'Tag 4'],
+      'id': '2',
+      'owner': 'Owner 2',
+      'createdAt': '2023-07-03',
+      'updatedAt': '2023-07-04',
+    },
+  ];
+
+  static const String catsResponseBody = '''
+        [
+          {
+            "tags": ["playful", "tabby", "striped"],
+            "id": "4",
+            "owner": "Bob Thompson",
+            "createdAt": "2022-01-07",
+            "updatedAt": "2022-01-08"
+          }
+        ]
+      ''';
 }

@@ -84,12 +84,10 @@ class Cat extends Equatable {
 
     final updatedAt =
         json['updatedAt'] == 'null' ? ' ' : json['updatedAt'].toString();
-    final List<String> tags = (json['tags'] as String)
-        .split(',')
-        .map((e) => e.replaceAll('\"', '').trim())
-        .toList();
+    final List<String> tags =
+        (json['tags'] as String).split(',').map((e) => e.trim()).toList();
     return Cat(
-      tags: json['tags'] == null ? [] : tags.toList() as List<String>,
+      tags: json['tags'] == null ? [] : tags.toList(),
       id: json['id'] == 'null' ? ' ' : json['id'],
       owner: json['owner'] == 'null' ? ' ' : json['owner'],
       createdAt: json['createdAt'] == 'null' ? ' ' : createdAt,

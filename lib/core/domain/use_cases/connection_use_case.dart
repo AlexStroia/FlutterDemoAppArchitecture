@@ -6,5 +6,6 @@ class ConnectionUseCase {
   final ConnectionRepository connectionRepository;
   const ConnectionUseCase(this.connectionRepository);
 
-  Future<Either<ConnectionFailure, bool>> execute() => connectionRepository.isConnected();
+  Future<Either<ConnectionFailure, bool>> execute() =>
+      connectionRepository.isConnected();
 }

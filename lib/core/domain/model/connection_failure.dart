@@ -15,7 +15,8 @@ class ConnectionFailure implements HasDisplayableFailure {
   DisplayableFailure displayableFailure() {
     switch (type) {
       case ConnectionFailureType.noInternet:
-        return DisplayableFailure.commonError('No internet connection. Showing Cached Data if there are any. If not switch internet on and off and data will be available');
+        return DisplayableFailure.commonError(
+            'No internet connection. Showing Cached Data if there are any. If not switch internet on and off and data will be available');
       case ConnectionFailureType.unknown:
         return DisplayableFailure.commonError();
     }

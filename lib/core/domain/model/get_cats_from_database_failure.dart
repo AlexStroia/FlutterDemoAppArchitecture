@@ -2,7 +2,8 @@ import 'package:demo_app_architecture/core/domain/model/displayable_failure.dart
 
 class GetCatsListFromDatabaseFailure implements HasDisplayableFailure {
   // ignore: avoid_field_initializers_in_const_classes
-  const GetCatsListFromDatabaseFailure.unknown([this.cause]) : type = GetCatsListFromDatabaseFailureType.unknown;
+  const GetCatsListFromDatabaseFailure.unknown([this.cause])
+      : type = GetCatsListFromDatabaseFailureType.unknown;
   const GetCatsListFromDatabaseFailure.databaseNotInitialized([this.cause])
       : type = GetCatsListFromDatabaseFailureType.databaseNotInitialized;
 
@@ -20,10 +21,8 @@ class GetCatsListFromDatabaseFailure implements HasDisplayableFailure {
   }
 
   @override
-  String toString() => 'GetCatsListFromDatabaseFailure{type: $type, cause: $cause}';
+  String toString() =>
+      'GetCatsListFromDatabaseFailure{type: $type, cause: $cause}';
 }
 
-enum GetCatsListFromDatabaseFailureType {
-  unknown,
-  databaseNotInitialized
-}
+enum GetCatsListFromDatabaseFailureType { unknown, databaseNotInitialized }

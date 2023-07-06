@@ -23,7 +23,6 @@ void main() {
     },
   );
 
-
   test("getIt resolves successfully", () async {
     final useCase = getIt<UpdateCatsToDatabaseUseCase>();
     expect(useCase, isNotNull);

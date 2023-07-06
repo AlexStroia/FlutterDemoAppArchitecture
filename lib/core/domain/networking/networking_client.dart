@@ -19,7 +19,7 @@ class NetworkClient {
       final response = await http.get(url, headers: _getHeaders());
       return Right(response);
     } catch (e) {
-      return Left(NetworkFailure());
+      return const Left(NetworkFailure.unknown());
     }
   }
 
@@ -37,10 +37,10 @@ class NetworkClient {
       if (response.statusCode == 200) {
         return Right(response);
       } else {
-        return Left(NetworkFailure());
+        return const Left(NetworkFailure.unknown());
       }
     } catch (e) {
-      return Left(NetworkFailure());
+      return const Left(NetworkFailure.unknown());
     }
   }
 
@@ -58,10 +58,10 @@ class NetworkClient {
       if (response.statusCode == 200) {
         return Right(response);
       } else {
-        return Left(NetworkFailure());
+        return const Left(NetworkFailure.unknown());
       }
     } catch (e) {
-      return Left(NetworkFailure());
+      return const Left(NetworkFailure.unknown());
     }
   }
 
@@ -79,10 +79,10 @@ class NetworkClient {
       if (response.statusCode == 200) {
         return Right(response);
       } else {
-        return Left(NetworkFailure());
+        return const Left(NetworkFailure.unknown());
       }
     } catch (e) {
-      return Left(NetworkFailure());
+      return const Left(NetworkFailure.unknown());
     }
   }
 

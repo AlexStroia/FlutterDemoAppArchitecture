@@ -4,8 +4,10 @@ import 'mock_definitions.dart';
 
 class Mocks {
   static late MockHttpClient httpClient;
+  static late MockDatabaseClient databaseClient;
   static late MockAppRouter appRouter;
   static late MockAppNavigator appNavigator;
+  static late MockConnectivity connectivity;
 
   static late MockDatabaseCatsRepository databaseCatsRepository;
   static late MockNetworkConnectionRepository networkConnectionRepository;
@@ -19,8 +21,10 @@ class Mocks {
 
   static void init() {
     httpClient = MockHttpClient();
+    databaseClient = MockDatabaseClient();
     appRouter = MockAppRouter();
     appNavigator = MockAppNavigator();
+    connectivity = MockConnectivity();
 
     databaseCatsRepository = MockDatabaseCatsRepository();
     networkConnectionRepository = MockNetworkConnectionRepository();
@@ -33,6 +37,7 @@ class Mocks {
     updateCatsUseCase = MockUpdateCatsUseCase();
 
     registerFallbackValue(MockHttpClient());
+    registerFallbackValue(MockDatabaseClient());
     registerFallbackValue(MockAppRouter());
     registerFallbackValue(MockAppNavigator());
 
@@ -45,5 +50,7 @@ class Mocks {
     registerFallbackValue(MockGetCatsListUseCase());
     registerFallbackValue(MockSaveCatsToDatabaseUseCase());
     registerFallbackValue(MockUpdateCatsUseCase());
+
+    registerFallbackValue(MockConnectivity());
   }
 }

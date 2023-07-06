@@ -8,6 +8,7 @@ import 'package:demo_app_architecture/core/domain/use_cases/connection_use_case.
 import 'package:demo_app_architecture/core/domain/use_cases/get_cats_from_database_use_case.dart';
 import 'package:demo_app_architecture/core/domain/use_cases/get_cats_list_use_case.dart';
 import 'package:demo_app_architecture/core/domain/use_cases/save_cats_to_database_use_case.dart';
+import 'package:demo_app_architecture/core/domain/use_cases/update_cats_to_database_use_case.dart';
 import 'package:demo_app_architecture/dependency_injection/app_component.dart';
 import 'package:demo_app_architecture/features/cats_list/cats_list_initial_params.dart';
 import 'package:demo_app_architecture/features/cats_list/cats_list_page.dart';
@@ -44,7 +45,7 @@ void _configureRepositories() {
         ..registerFactory<OfflineCatsRepository>(
             () => DatabaseCatsRepository(getIt()))
         ..registerFactory<ConnectionRepository>(
-            () => const NetworkConnectionRepository())
+            () => NetworkConnectionRepository(getIt()))
       //DO-NOT-REMOVE REPOSITORIES_GET_IT_CONFIG
       ;
 }
@@ -64,7 +65,9 @@ void _configureUseCases() {
     ..registerFactory<GetCatsFromDatabaseUseCase>(
         () => GetCatsFromDatabaseUseCase(getIt()))
     ..registerFactory<ConnectionUseCase>(() => ConnectionUseCase(getIt()))
-    ..registerFactory<SaveCatsToDatabaseUseCase>(() => SaveCatsToDatabaseUseCase(getIt()))
+    ..registerFactory<SaveCatsToDatabaseUseCase>(
+        () => SaveCatsToDatabaseUseCase(getIt()))
+    ..registerFactory(() => const UpdateCatsToDatabaseUseCase())
     ..registerFactory<GetCatsListUseCase>(() => GetCatsListUseCase(getIt()));
 }
 

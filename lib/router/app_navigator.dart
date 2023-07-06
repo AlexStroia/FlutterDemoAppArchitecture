@@ -58,7 +58,8 @@ class AppNavigator {
     }
   }
 
-  Future<void> showSnackbar({required String message, BuildContext? context}) async {
+  Future<void> showSnackbar(
+      {required String message, BuildContext? context}) async {
     final snackbar = SnackBar(
       content: Text(message),
       duration: const Duration(seconds: 3),

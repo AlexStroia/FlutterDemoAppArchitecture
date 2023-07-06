@@ -7,7 +7,7 @@ class DatabaseClient<T> {
   Database? _database;
   bool _isInitialized = false;
 
-  Future<void> initialize(String tableName) async {
+  Future<void> _initialize(String tableName) async {
     String databasePath = await getDatabasesPath();
     String path = join(databasePath, 'demo.db');
 
@@ -36,7 +36,7 @@ class DatabaseClient<T> {
   Future<Either<DatabaseFailure, List<Map<String, dynamic>>>> getAll(
       String tableName) async {
     if (!_isInitialized) {
-      await initialize(
+      await _initialize(
         tableName,
       ); // Call initialize if not initialized
     }
@@ -51,7 +51,7 @@ class DatabaseClient<T> {
   Future<Either<DatabaseFailure, int>> add(
       String tableName, dynamic data) async {
     if (!_isInitialized) {
-      await initialize(
+      await _initialize(
         tableName,
       ); // Call initialize if not initialized
     }
@@ -80,8 +80,7 @@ class DatabaseClient<T> {
   Future<Either<DatabaseFailure, int>> update(
       String tableName, Map<String, dynamic> body, String id) async {
     if (!_isInitialized) {
-      await initialize(
-          tableName); // Call initialize if not initialized
+      await _initialize(tableName); // Call initialize if not initialized
     }
 
     try {
@@ -98,7 +97,7 @@ class DatabaseClient<T> {
 
   Future<Either<DatabaseFailure, int>> delete(String tableName, int id) async {
     if (!_isInitialized) {
-      await initialize(
+      await _initialize(
         tableName,
       ); // Call initialize if not initialized
     }

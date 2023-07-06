@@ -4,5 +4,4 @@ import 'package:demo_app_architecture/core/domain/model/get_cats_list_failure.da
 
 abstract class CatsRepository {
   Future<Either<GetCatsListFailure, List<Cat>>> getCatsList();
-
 }

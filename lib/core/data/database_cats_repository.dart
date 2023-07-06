@@ -18,7 +18,8 @@ class DatabaseCatsRepository implements OfflineCatsRepository {
   Future<Either<GetCatsListFromDatabaseFailure, List<Cat>>> getCatsList() {
     return databaseClient.getAll(DatabaseConstants.cats).mapSuccess((response) {
       final catsData = response;
-      final cats = catsData.map((catData) => Cat.fromDatabase(catData)).toList();
+      final cats =
+          catsData.map((catData) => Cat.fromDatabase(catData)).toList();
       return cats;
     }).mapFailure((fail) {
       switch (fail) {
@@ -55,9 +56,8 @@ class DatabaseCatsRepository implements OfflineCatsRepository {
   Future<Either<SaveCatsToDatabaseFailure, int>> add(dynamic body) {
     return databaseClient
         .add(DatabaseConstants.cats, body)
-        .mapSuccess((response) {
-      return response;
-    }).mapFailure((fail) {
+        .mapSuccess((response) => response)
+        .mapFailure((fail) {
       switch (fail) {
         case DatabaseFailure.unknown:
           return const SaveCatsToDatabaseFailure.unknown();

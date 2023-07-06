@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:demo_app_architecture/core/api_constants.dart';
 import 'package:demo_app_architecture/core/domain/database/database_client.dart';
 import 'package:demo_app_architecture/core/domain/networking/networking_client.dart';
@@ -16,6 +17,7 @@ final getIt = GetIt.instance;
 
 void initDependencies() {
   _configureNavigator();
+  _configureConnectivity();
   _configureNetworkClient();
   _configureDatabaseClient();
   cats_list.configureDependencies();
@@ -37,3 +39,6 @@ void _configureNetworkClient() =>
 
 void _configureDatabaseClient() =>
     getIt.registerFactory(() => DatabaseClient());
+
+void _configureConnectivity() =>
+    getIt.registerFactory<Connectivity>(() => Connectivity());
